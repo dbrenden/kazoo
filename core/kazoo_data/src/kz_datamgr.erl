@@ -1174,7 +1174,12 @@ add_required_option({Key, Fun}, {JObj, Options}=Acc) ->
 
 -ifdef(TEST).
 -define(GET_RESULTS(DbName, DesignId, Options)
-       ,io:format(user, "\n~s:get_results(~p, ~p, ~p)\n", [?MODULE, DbName, DesignId, Options])).
+       ,begin
+                io:format(user, "\n~s:get_results(~p, ~p, ~p)\n", [?MODULE, DbName, DesignId, Options]),
+                {_, ST} = erlang:process_info(self(), current_stacktrace),
+                kz_util:log_stacktrace(ST)
+        end
+       ).
 -else.
 -define(GET_RESULTS(DbName, DesignId, Options), ok).
 -endif.

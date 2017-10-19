@@ -88,7 +88,7 @@ print_result(RoutingKey, Map) ->
     Disabled = erlang:length(maps:get('disabled', Map, [])),
     Ignored = erlang:length(maps:get('ignored', Map, [])),
     Failed = erlang:length(maps:get('failed', Map, [])),
-    lager:debug("notification ~s resulted in ~b success, ~b failed, ~b ignored, ~b disabled, full result: ~p"
+    ?LOG_DEBUG("notification ~s resulted in ~b success, ~b failed, ~b ignored, ~b disabled, full result: ~p"
                ,[RoutingKey, Completed, Failed, Ignored, Disabled, maps:to_list(Map)]
                ).
 
